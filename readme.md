@@ -1,4 +1,4 @@
-# Realtime Voice Chatbot
+# 🗣️ Realtime Voice Chatbot
 
 This is a personal project to develop a local application using FastAPI that interacts with OpenAI's Realtime API. The app allows users to communicate either via text (already implemented) or voice (currently under development).
 
@@ -40,7 +40,7 @@ Access the app at http://localhost:8000  after running the backend locally:
 uvicorn src.main:app --reload
 ```
 
-## 🛠️ Project Status
+## 🚧 Project Status
 
 This project is a work in progress:
 
