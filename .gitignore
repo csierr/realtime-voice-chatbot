@@ -1,0 +1,9 @@
+.env/ 
+.venv/
+src\__pycache__/
+__pycache__/
+*.pyc
+rt_conversation.py
+rt_conversation2.py
+testing_await.py
+log.txt
