@@ -1,17 +1,53 @@
-# Real-time Voice Chatbot with GPT-4o-realtime
+# Realtime Voice Chatbot
 
-Conversational voice chatbot using OpenAI's Realtime API, WebSocket, and PyAudio.
+This is a personal project to develop a local application using FastAPI that interacts with OpenAI's Realtime API. The app allows users to communicate either via text (already implemented) or voice (currently under development).
 
-## Features
+## ✨ Features
 
-- Voice interaction with GPT-4o using Realtime API.
-- Uses server-side Voice Activity Detection (VAD).
-- Text and audio inputs supported, besides q command to quit the session.
-- Plays audio responses locally.
+- Text-based conversation with OpenAI's Realtime API
+- Voice-based interaction using WebSocket streaming and VAD (in progress)
+- FastAPI backend for serving the application
+- Environment variables managed via `.env` file (not pushed to github, but .env.example provided)
 
-## Setup
+## 🚀 Installation
 
-### 1. Clone the repo
-```bash
-git clone https://github.com/csierr/realtime-voice-chatbot.git
-cd realtime-voice-chatbot
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/csierr/realtime-voice-chatbot.git
+   cd realtime-voice-chatbot
+
+2. Create and activate a virtual environment:
+
+    ```bash
+    python -m venv .venv
+    source .venv/Scripts/activate  # Windows
+    source .venv/bin/activate      # Linux/Mac
+
+3. Install dependencies:
+
+    ```bash
+    pip install -r requirements.txt
+
+4. Create a `.env` file based on `.env.example`, and insert your OpenAI API key.
+
+
+## ⚡ Usage
+
+To run the backend locally:
+
+    ```bash
+    uvicorn src.main:app --reload
+    ```
+
+Access the app at: http://localhost:8000 
+
+## 🛠️ Project Status
+
+This project is a work in progress:
+
+✅ Text conversation with OpenAI is functional
+
+🛠 **Voice conversation module is under active development**
+
+📝 More features and improvements planned
