@@ -59,3 +59,10 @@ This project is a work in progress:
 🛠 **Voice conversation module is under active development**
 
 📝 More features and improvements planned
+
+
+# 🖼️ Preview
+
+Here’s a preview of the app in action!
+
+![Realtime_voice_chat](realtime-voice-chat.png)
