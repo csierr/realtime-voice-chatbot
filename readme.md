@@ -9,6 +9,16 @@ This is a personal project to develop a local application using FastAPI that int
 - FastAPI backend for serving the application
 - Environment variables managed via `.env` file (not pushed to github, but .env.example provided)
 
+## 🧰 Tech Stack
+
+- **FastAPI** — Web framework for building APIs
+- **Uvicorn** — ASGI server to run the FastAPI app
+- **OpenAI API** — OpenAI Realtime API for real-time interaction
+- **Python** — Main programming language
+- **HTML** — Simple frontend for user interaction
+- **WebSocket** — For real-time communication
+- **PyAudio** — For handling audio input/output
+
 ## 🚀 Installation
 
 1. Clone the repository:
