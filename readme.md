@@ -5,7 +5,7 @@ This is a personal project to develop a local application using FastAPI that int
 ## ✨ Features
 
 - Text-based conversation with OpenAI's Realtime API
-- Voice-based interaction using WebSocket streaming and VAD (in progress)
+- Voice-based interaction using WebSocket streaming and VAD (**in progress**)
 - FastAPI backend for serving the application
 - Environment variables managed via `.env` file (not pushed to github, but .env.example provided)
 
