@@ -1,6 +1,6 @@
 # 🗣️ Realtime Voice Chatbot
 
-This is a personal project to develop a local application using FastAPI that interacts with OpenAI's Realtime API. The app allows users to communicate either via text (already implemented) or voice (currently under development).
+This is a personal project to develop a local application using FastAPI that interacts with OpenAI's Realtime API. The app allows users to communicate either via text (already implemented) or voice (**under development**).
 
 ## ✨ Features
 
