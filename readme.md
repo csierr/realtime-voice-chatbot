@@ -16,6 +16,7 @@ This is a personal project to develop a local application using FastAPI that int
    ```bash
    git clone https://github.com/csierr/realtime-voice-chatbot.git
    cd realtime-voice-chatbot
+   ```
 
 2. Create and activate a virtual environment:
 
@@ -23,11 +24,13 @@ This is a personal project to develop a local application using FastAPI that int
     python -m venv .venv
     source .venv/Scripts/activate  # Windows
     source .venv/bin/activate      # Linux/Mac
+    ```
 
 3. Install dependencies:
 
     ```bash
     pip install -r requirements.txt
+    ```
 
 4. Create a `.env` file based on `.env.example`, and insert your OpenAI API key.
 
