@@ -34,13 +34,11 @@ This is a personal project to develop a local application using FastAPI that int
 
 ## ⚡ Usage
 
-To run the backend locally:
+Access the app at: http://localhost:8000  after running the backend locally:
 
     ```bash
     uvicorn src.main:app --reload
     ```
-
-Access the app at: http://localhost:8000 
 
 ## 🛠️ Project Status
 
