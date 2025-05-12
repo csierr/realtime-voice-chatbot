@@ -22,9 +22,9 @@ realtime-voice-chatbot/
 ├── requirements.txt
 ├── README.md
 ├── src/
-│   ├── websocket\_server.py
-│   └── my\_realtime\_client.py
-└── public/
+    ├── websocket_server.py
+    └── my_realtime_client.py
+|── public/
 ├── index.html
 ├── favicon-32x32.png
 ├── js/
