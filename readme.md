@@ -11,41 +11,22 @@ This is a personal project to develop a local application using FastAPI that int
 - Environment variables managed via `.env` file (not pushed to github, but .env.example provided)
 
 ## 📁 Project Structure
+
 realtime-voice-chatbot/
-
-│
-
 ├── .env.example
-
 ├── .gitignore
-
 ├── requirements.txt
-
 ├── README.md
-
-│
-
 ├── src/
-
-│   ├── websocket_server.py
-
-│   └── my_realtime_client.py
-
-│
-
+│ ├── websocket_server.py
+│ └── my_realtime_client.py
 └── public/
-
-    ├── index.html
-
-    ├── favicon-32x32.png
-
-    ├── js/
-
-    │   └── main.js
-
-    └── css/
-
-        └── styles.css
+├── index.html
+├── favicon-32x32.png
+├── js/
+│ └── main.js
+└── css/
+└── styles.css
 
 
 ## 🧰 Tech Stack
