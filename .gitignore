@@ -8,3 +8,6 @@ rt_conversation2.py
 testing_await.py
 log.txt
 transcription.txt
+# Ignored legacy modules
+src/audio_handler.py
+src/event_handler.py
