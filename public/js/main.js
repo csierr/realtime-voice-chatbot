@@ -63,7 +63,9 @@ ws.onmessage = async (event) => {
 
         if (mediaSource.readyState === "open") {
             try {
-            mediaSource.endOfStream();
+            if (!mediaSource.sourceBuffers[0].updating) {
+                mediaSource.endOfStream();
+            }
             console.log("🔚 MediaSource marked as completed...");
             } catch (e) {
             console.warn("⚠️ Error closing MediaSource:", e);

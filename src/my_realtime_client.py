@@ -1,24 +1,59 @@
 import json
-from .realtime_client import RealtimeClient
+import json
+import websockets
 from fastapi import WebSocket
 from pydub import AudioSegment
 import io
 import base64
 
-class MyRealtimeClient(RealtimeClient):
+class MyRealtimeClient:
     """
-    Client extending functionality of base client 'RealtimeClient' (interaction with Realtime OpenAI API via WebSocket)
-    to integrate with a FastAPI WebSocket connection.
+    Client to interact with the OpenAI Realtime API via WebSocket and to integrate with a FastAPI WebSocket connection.
     """
-    def __init__(self, websocket: WebSocket, **kwargs):
+    def __init__(self, api_key: str, instructions: str, voice: str, websocket: WebSocket = None):
         """
         Initializes client with a FastAPI WebSocket and other parameters
-
-        websocket (WebSocket): WebSocket active with client
-        kwargs: additional arguments passed to the base client
         """
-        super().__init__(**kwargs)
+        self.url = "wss://api.openai.com/v1/realtime?model=gpt-4o-realtime-preview-2024-12-17"
+        self.headers = {
+            "Authorization": f"Bearer {api_key}",
+            "OpenAI-Beta": "realtime=v1"
+        }
+        self.ws = None
         self.websocket = websocket
+        self.instructions = instructions
+        self.voice = voice
+
+        # VAD configuration (enabled by default)
+        self.VAD_turn_detection = True
+        self.VAD_config = {
+            "type": "server_vad",
+            "threshold": 0.8,
+            "prefix_padding_ms": 300,
+            "silence_duration_ms": 1000,
+            "interrupt_response": False
+        }
+
+        # Session configuration
+        self.session_config = {
+            "modalities": ["audio", "text"],
+            "instructions": self.instructions,
+            "voice": self.voice,
+            "input_audio_format": "pcm16",
+            "output_audio_format": "pcm16",
+            "turn_detection": self.VAD_config if self.VAD_turn_detection else None,
+            "input_audio_transcription": {"model": "whisper-1"},
+            "temperature": 0.6,
+        }
+
+    
+    async def connect(self):
+        """
+        Connects to OpenAI Realtime WebSocket and sends session config
+        """
+        self.ws = await websockets.connect(self.url, extra_headers=self.headers)
+        await self.send_event({"type": "session.update", "session": self.session_config})
+        await self.send_event({"type": "response.create"})
 
 
     async def handle_event(self, event: dict):
@@ -61,11 +96,47 @@ class MyRealtimeClient(RealtimeClient):
         if event_type == 'response.audio.done':
             await self.websocket.send_json({"type": "audio_done"})
 
+    
+    async def send_event(self, event):
+        """
+        Sending events to WebSocket server
+
+        event: Event to send (from user)
+        """
+        await self.ws.send(json.dumps(event))
+        print(f"Event sent: {event['type']}")
+
+    
+    async def send_text(self, text):
+        """
+        Sending text to WebSocket server
+
+        text: Text message to send
+        """
+        await self.send_event({
+            "type": "conversation.item.create",
+            "item": {
+                "type": "message",
+                "role": "user",
+                "content": [{"type": "input_text", "text": text}]
+            }
+        })
+        await self.send_event({"type": "response.create"})
+
+
+    async def clean_up(self):
+        """
+        Closes the WebSocket connection
+        """
+        if self.ws:
+            await self.ws.close()
+
 
     async def run(self):
         """
-        Executes main Realtime client cycle: connects, listens for incoming events and passes them to the corresponding handler
-        It also handles errors and performs end-of-session cleanup.
+        Establishes a connection to the OpenAI Realtime API, then listens for incoming events
+        and processes them accordingly. If a FastAPI WebSocket is provided, events are forwarded
+        to the connected client. Automatically handles cleanup and error reporting.
         """
         await self.connect()
         try:
