@@ -10,7 +10,11 @@ This is a personal project to develop a local application using FastAPI that int
 - FastAPI backend serving both HTML and WebSocket endpoints
 - Environment variables managed via `.env` file (not pushed to github, but .env.example provided)
 
+Claro, aquí tienes la estructura del proyecto correctamente formateada en Markdown:
+
+
 ## 📁 Project Structure
+
 
 realtime-voice-chatbot/
 ├── .env.example
@@ -18,15 +22,17 @@ realtime-voice-chatbot/
 ├── requirements.txt
 ├── README.md
 ├── src/
-│ ├── websocket_server.py
-│ └── my_realtime_client.py
+│   ├── websocket\_server.py
+│   └── my\_realtime\_client.py
 └── public/
 ├── index.html
 ├── favicon-32x32.png
 ├── js/
-│ └── main.js
+│   └── main.js
 └── css/
 └── styles.css
+
+
 
 
 ## 🧰 Tech Stack
