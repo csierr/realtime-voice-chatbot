@@ -12,3 +12,4 @@ transcription.txt
 src/audio_handler.py
 src/event_handler.py
 src/main.py
+src/realtime_client.py
