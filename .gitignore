@@ -11,3 +11,4 @@ transcription.txt
 # Ignored legacy modules
 src/audio_handler.py
 src/event_handler.py
+src/main.py
