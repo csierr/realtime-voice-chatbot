@@ -15,7 +15,7 @@ Claro, aquí tienes la estructura del proyecto correctamente formateada en Markd
 
 ## 📁 Project Structure
 
-
+```
 realtime-voice-chatbot/
 ├── .env.example
 ├── .gitignore
@@ -31,7 +31,7 @@ realtime-voice-chatbot/
 │   └── main.js
 └── css/
 └── styles.css
-
+```
 
 
 
