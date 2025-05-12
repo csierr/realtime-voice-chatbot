@@ -18,6 +18,7 @@ Claro, aquí tienes la estructura del proyecto correctamente formateada en Markd
 ```
 realtime-voice-chatbot/
 ├── .env.example
+├── chatbot-screenshot.png
 ├── .gitignore
 ├── requirements.txt
 ├── README.md
