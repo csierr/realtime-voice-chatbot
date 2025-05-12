@@ -3,47 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <title>Chat with GPT</title>
-  <style>
-    body { font-family: sans-serif; max-width: 600px; margin: auto; }
-    .chatbox { border: 1px solid #ccc; padding: 1em; height: 400px; overflow-y: scroll; }
-    .msg { margin-bottom: 1em; }
-    .user { color: blue; }
-    .bot { color: green; }
-  </style>
+  <link rel="stylesheet" href="/static/css/styles.css" />
 </head>
 <body>
   <h1>Realtime Voice Chatbot 🗣️</h1>
   <div class="chatbox" id="chatbox"></div>
   <input type="text" id="textInput" placeholder="Write something..." />
-  <button onclick="sendText()">📥Send</button>
-  <button onclick="startRecording()">🎙️Talk</button>
-  <script>
-    const ws = new WebSocket("ws://localhost:8000/ws");
-    const chatbox = document.getElementById("chatbox");
-
-    ws.onmessage = (event) => {
-      const msg = JSON.parse(event.data);
-      const div = document.createElement("div");
-      div.className = "msg bot";
-      div.innerText = "🤖 " + msg.text;
-      chatbox.appendChild(div);
-    };
-
-    function sendText() {
-      const input = document.getElementById("textInput");
-      const message = input.value;
-      ws.send(JSON.stringify({ type: "text", data: message }));
-      const div = document.createElement("div");
-      div.className = "msg user";
-      div.innerText = "🧑 " + message;
-      chatbox.appendChild(div);
-      input.value = "";
-    }
-
-    function startRecording() {
-      // Se puede usar MediaRecorder y enviar el audio en base64 al WebSocket
-      alert("🎤 Grabación aún no implementada aquí.");
-    }
-  </script>
+  <button id="sendBtn">📥Send</button>
+  <button id="talkBtn">🎙️Talk</button>
+  <script src="/static/js/main.js"></script>
 </body>
 </html>

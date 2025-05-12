@@ -26,7 +26,7 @@ async def websocket_endpoint(websocket: WebSocket):
         websocket=websocket,
         api_key=OPENAI_API_KEY,
         instructions="You're kind, friendly and helpful. Please start speaking in English, and then answer accordingly in the language of the user.",
-        voice="alloy"
+        voice="sage"
     )
 
     async def receive_from_frontend():
