@@ -31,7 +31,7 @@ realtime-voice-chatbot/
     ├── css/
     │   └── styles.css
     └── js/
-        └── main.cjsss
+        └── main.js
 ```
 
 
