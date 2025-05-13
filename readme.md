@@ -42,7 +42,6 @@ realtime-voice-chatbot/
 - **Python** — Main programming language
 - **HTML** — Simple frontend for user interaction
 - **WebSocket** — For real-time communication
-- **PyAudio** — For handling audio input/output
 
 ## 🚀 Installation
 
