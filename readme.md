@@ -10,8 +10,6 @@ This is a personal project to develop a local application using FastAPI that int
 - FastAPI backend serving both HTML and WebSocket endpoints
 - Environment variables managed via `.env` file (not pushed to github, but .env.example provided)
 
-Claro, aquí tienes la estructura del proyecto correctamente formateada en Markdown:
-
 
 ## 📁 Project Structure
 
