@@ -8,7 +8,7 @@ This is a personal project to develop a local application using FastAPI that int
 - Buffered audio playback that receives audio chunks via WebSocket and plays them after full reception
 - WebSocket communication between frontend and backend
 - FastAPI backend serving both HTML and WebSocket endpoints
-- Environment variables managed via `.env` file (not pushed to github, but .env.example provided)
+- Environment variables managed via `.env` file (`.env.example` provided)
 
 
 ## 📁 Project Structure
