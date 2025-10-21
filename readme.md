@@ -84,9 +84,7 @@ This project is a work in progress:
 
 ✅ Audio reception & playback
 
-🛠 Audio input from browser **is under active development**
-
-📝 More features and improvements planned
+🛠 Audio input from browser **is under development**
 
 The current audio implementation buffers chunks and starts playback only after the final `audio_done` signal is received. True streaming playback is not yet supported.
 
