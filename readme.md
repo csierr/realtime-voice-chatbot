@@ -102,4 +102,4 @@ Here’s a preview of the app in action!
 
 In the screenshot, you can see the app running, with the terminal/console (opened via F12) visible to monitor logs and see what's happening behind the scenes in real time.
 
-![Realtime_voice_chat](chatbot-screenshot.png)
+![Realtime_voice_chat](images/chatbot-screenshot.png)
