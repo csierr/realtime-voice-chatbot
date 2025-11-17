@@ -1,5 +1,7 @@
+# Virtual environment and Python files
 .env
 .venv/
+venv/
 src\__pycache__/
 __pycache__/
 *.pyc
@@ -8,7 +10,36 @@ rt_conversation2.py
 testing_await.py
 log.txt
 transcription.txt
-# Ignored legacy modules
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependency directories
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Unused files
+unused/
+legacy/
 src/audio_handler.py
 src/event_handler.py
 src/main.py
