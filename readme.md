@@ -50,18 +50,24 @@ realtime-voice-chatbot/
    ```bash
    git clone https://github.com/csierr/realtime-voice-chatbot.git
    cd realtime-voice-chatbot
+   ```
 
 2. Create and activate a virtual environment:
 
     ```bash
-    python -m venv .venv
-    source .venv/Scripts/activate  # Windows
-    source .venv/bin/activate      # Linux/Mac
+    python3 -m venv .venv         # Linux/Mac
+    source .venv/bin/activate     # Linux/Mac
+    ```
 
 3. Install dependencies:
 
+    If not already installed, you may need to add `portaudio19-dev` and `ffmpeg`.
+    
     ```bash
+    sudo apt-get update; sudo apt-get install -y portaudio19-dev
+    sudo apt-get update; sudo apt-get install -y ffmpeg
     pip install -r requirements.txt
+    ```
 
 4. Create a `.env` file based on `.env.example`, and insert your OpenAI API key.
 
