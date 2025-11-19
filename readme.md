@@ -90,7 +90,9 @@ You will need to run the backend and frontend servers in two separate terminals.
 This project is a work in progress:
 
 ✅ Text conversation with OpenAI is functional
+
 ✅ Audio reception & playback is functional
+
 🛠️ Audio input from the browser **is under development**
 
 The current audio implementation buffers chunks and starts playback only after the final `audio_done` signal is received.
@@ -98,8 +100,6 @@ The current audio implementation buffers chunks and starts playback only after t
 # 🖼️ Preview
 
 Here’s a preview of the app in action!
-
-In the screenshot, you can see the app running, with the terminal/console (opened via F12) visible to monitor logs and see what's happening behind the scenes in real time.
 
 ![Landing_page](images/new-chatbot-screenshot-1.png)
 ![Realtime_voice_chat](images/new-chatbot-screenshot-2.png)
