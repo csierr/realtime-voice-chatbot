@@ -1,100 +1,99 @@
 # 🗣️ Realtime Voice Chatbot
 
-This is a personal project to develop a local application using FastAPI that interacts with OpenAI's Realtime API. The app allows users to chat via text (already implemented) and voice (**under development**).
+This is a personal project to develop a local application using FastAPI and React that interacts with OpenAI's Realtime API. The app allows users to chat via text and receive spoken responses from the AI.
 
 ## ✨ Features
 
 - Text chat with OpenAI's Realtime API
 - Buffered audio playback that receives audio chunks via WebSocket and plays them after full reception
-- WebSocket communication between frontend and backend
-- FastAPI backend serving both HTML and WebSocket endpoints
-- Environment variables managed via `.env` file (`.env.example` provided)
-
+- WebSocket communication between frontend (React) and backend (FastAPI)
+- FastAPI backend serving the WebSocket endpoint
+- React frontend built with Vite and styled with Tailwind CSS
+- Environment variables managed via `.env` file
 
 ## 📁 Project Structure
 
 ```
 realtime-voice-chatbot/
-├── .env.example
-├── chatbot-screenshot.png
-├── .gitignore
-├── requirements.txt
-├── README.md
-├── src/
+├── backend/
+│   ├── my_realtime_client.py
 │   ├── websocket_server.py
-│   └── my_realtime_client.py
-└── public/
-    ├── index.html
-    ├── favicon-32x32.png
-    ├── css/
-    │   └── styles.css
-    └── js/
-        └── main.js
+│   └── utils.py
+├── src/
+│   ├── components/
+│   ├── hooks/
+│   ├── pages/
+│   ├── App.tsx
+│   └── main.tsx
+├── images/
+├── index.html
+├── .env.example
+├── requirements.txt
+├── package.json
+└── readme.md
 ```
-
-
 
 ## 🧰 Tech Stack
 
-- **FastAPI** — Web framework for building APIs
-- **Uvicorn** — ASGI server to run the FastAPI app
-- **OpenAI API** — OpenAI Realtime API for real-time interaction
-- **Python** — Main programming language
-- **HTML** — Simple frontend for user interaction
-- **WebSocket** — For real-time communication
+- **Backend**: FastAPI, Uvicorn, OpenAI API, Python, WebSockets
+- **Frontend**: React, TypeScript, Vite, Tailwind CSS
 
 ## 🚀 Installation
 
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/csierr/realtime-voice-chatbot.git
-   cd realtime-voice-chatbot
-   ```
-
-2. Create and activate a virtual environment:
-
+1.  **Clone the repository:**
     ```bash
-    python3 -m venv .venv         # Linux/Mac
-    source .venv/bin/activate     # Linux/Mac
+    git clone https://github.com/csierr/realtime-voice-chatbot.git
+    cd realtime-voice-chatbot
     ```
 
-3. Install dependencies:
+2.  **Set up the Backend:**
+    - Create and activate a virtual environment:
+      ```bash
+      python3 -m venv .venv         # Linux/Mac
+      source .venv/bin/activate     # Linux/Mac
+      ```
+    - Install backend dependencies. If not already installed, you may need to add `portaudio19-dev` and `ffmpeg`.
+      ```bash
+      sudo apt-get update; sudo apt-get install -y portaudio19-dev
+      sudo apt-get update; sudo apt-get install -y ffmpeg
+      pip install -r requirements.txt
+      ```
 
-    If not already installed, you may need to add `portaudio19-dev` and `ffmpeg`.
-    
-    ```bash
-    sudo apt-get update; sudo apt-get install -y portaudio19-dev
-    sudo apt-get update; sudo apt-get install -y ffmpeg
-    pip install -r requirements.txt
-    ```
+3.  **Set up the Frontend:**
+    - Install frontend dependencies:
+      ```bash
+      npm install
+      ```
 
-4. Create a `.env` file based on `.env.example`, and insert your OpenAI API key.
-
+4.  **Configure Environment Variables:**
+    - Create a `.env` file in the root directory based on `.env.example`, and insert your OpenAI API key.
 
 ## ⚡ Usage
 
-Access the app at http://localhost:8000  after running the backend locally:
+You will need to run the backend and frontend servers in two separate terminals.
 
-```bash
-uvicorn src.websocket_server:app --reload
-```
+1.  **Run the backend server:**
+    ```bash
+    uvicorn backend.websocket_server:app --reload
+    ```
 
-When you access the app you need to **click anywhere on the page to enable audio playback**. This is due to restrictions in modern browsers, which block media playback automatically until the user interacts with the page. Once you click, the audio playback functionality should work as expected.
+2.  **Run the frontend development server:**
+    ```bash
+    npm run dev
+    ```
+
+3.  **Access the application:**
+    - Open your browser and go to `http://localhost:8080`.
 
 ## 🚧 Project Status
 
 This project is a work in progress:
 
 ✅ Text conversation with OpenAI is functional
+✅ Audio reception & playback is functional
+🛠️ Audio input from the browser **is under development**
 
-✅ Audio reception & playback
-
-🛠 Audio input from browser **is under development**
-
-The current audio implementation buffers chunks and starts playback only after the final `audio_done` signal is received. True streaming playback is not yet supported.
-
-
+The current audio implementation buffers chunks and starts playback only after the final `audio_done` signal is received.
 
 # 🖼️ Preview
 
@@ -102,4 +101,5 @@ Here’s a preview of the app in action!
 
 In the screenshot, you can see the app running, with the terminal/console (opened via F12) visible to monitor logs and see what's happening behind the scenes in real time.
 
-![Realtime_voice_chat](chatbot-screenshot.png)
+![Landing_page](images/new-chatbot-screenshot-1.png)
+![Realtime_voice_chat](images/new-chatbot-screenshot-2.png)

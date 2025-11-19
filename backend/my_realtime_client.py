@@ -1,5 +1,4 @@
 import json
-import json
 import websockets
 from fastapi import WebSocket
 from pydub import AudioSegment
@@ -51,9 +50,14 @@ class MyRealtimeClient:
         """
         Connects to OpenAI Realtime WebSocket and sends session config
         """
-        self.ws = await websockets.connect(self.url, extra_headers=self.headers)
-        await self.send_event({"type": "session.update", "session": self.session_config})
-        await self.send_event({"type": "response.create"})
+        try:
+            self.ws = await websockets.connect(self.url, extra_headers=self.headers)
+            await self.send_event({"type": "session.update", "session": self.session_config})
+            await self.send_event({"type": "response.create"})
+        except Exception as e:
+            print(f"Error connecting to OpenAI: {e}")
+            if self.websocket:
+                await self.websocket.send_json({"type": "error", "data": "Error connecting to AI service."})
 
 
     async def handle_event(self, event: dict):
@@ -69,11 +73,12 @@ class MyRealtimeClient:
         if event_type in ["response.audio_transcript.done", "conversation.item.input_audio_transcription.completed"]:
             transcript = event.get("transcript", "No transcript available.")
             print("📝 Transcript:", transcript)
-            await self.websocket.send_json({"text": transcript})
+            if self.websocket:
+                await self.websocket.send_json({"text": transcript})
 
         if event_type == 'response.audio.delta':
             delta_base64 = event.get('delta')
-            if delta_base64:
+            if delta_base64 and self.websocket:
                 # Decode base64 PCM
                 raw_pcm = base64.b64decode(delta_base64)
                 # Create AudioSegment from raw PCM
@@ -94,10 +99,34 @@ class MyRealtimeClient:
                 })
         
         if event_type == 'response.audio.done':
-            await self.websocket.send_json({"type": "audio_done"})
+            if self.websocket:
+                await self.websocket.send_json({"type": "audio_done"})
+        
+        if event_type == 'error':
+            error_message = event.get('message', 'An unknown error occurred.')
+            print(f"Error from OpenAI: {error_message}")
+            if self.websocket:
+                await self.websocket.send_json({"type": "error", "data": error_message})
+
+
+    async def send_text(self, text: str):
+        """
+        Sends a text message to the Realtime API.
+        """
+        if self.ws:
+            await self.send_event({
+                "type": "conversation.item.create",
+                "text": text,
+                "role": "user"
+            })
 
     
     async def send_event(self, event):
+        """
+        Sends an event to the Realtime API WebSocket.
+        """
+        if self.ws:
+            await self.ws.send(json.dumps(event))
         """
         Sending events to WebSocket server
 
@@ -126,24 +155,25 @@ class MyRealtimeClient:
 
     async def clean_up(self):
         """
-        Closes the WebSocket connection
+        Closes the WebSocket connection.
         """
         if self.ws:
             await self.ws.close()
+            self.ws = None
 
 
     async def run(self):
         """
-        Establishes a connection to the OpenAI Realtime API, then listens for incoming events
-        and processes them accordingly. If a FastAPI WebSocket is provided, events are forwarded
-        to the connected client. Automatically handles cleanup and error reporting.
+        Main loop to run the client.
         """
         await self.connect()
         try:
-            async for message in self.ws:
-                event = json.loads(message)
-                await self.handle_event(event)
+            while True:
+                event = await self.ws.recv()
+                await self.handle_event(json.loads(event))
+        except websockets.exceptions.ConnectionClosed as e:
+            print(f"Connection closed: {e}")
         except Exception as e:
-            print("Error my_realtime_client.py:", e)
+            print(f"An error occurred: {e}")
         finally:
             await self.clean_up()
